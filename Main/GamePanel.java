@@ -6,15 +6,24 @@ import javax.swing.JPanel;
 import java.awt.*;
 
 public class GamePanel extends JPanel {
-    private final int screenWidth = 1000;
-    private final int screenHeight = 700;
-    GameMenu gameMenu = new GameMenu();
+    private final int panelWidth = 1000; //sirka 
+    private final int panelHeight = 700;
+    GameMenu gameMenu = new GameMenu(this);
 
     //konstruktor
     public GamePanel(){
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
+        this.setPreferredSize(new Dimension(panelWidth, panelHeight)); //nastaveni velikosti
         this.setBackground(Color.BLACK); //nastaveni pozadi
         this.setFocusable(true); //nastaveni soustredeni
+    }
+
+    //gettery a settery
+    public int getPanelWidth() {
+        return panelWidth;
+    }
+
+    public int getPanelHeight() {
+        return panelHeight;
     }
 
     //metoda pro zobrazovani kontentu
