@@ -1,21 +1,25 @@
 package Main;
 
 import Screens.GameMenu;
+import Screens.SubstanceMaker;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements Runnable{
     private final int panelWidth = 1000; //sirka 
-    private final int panelHeight = 700;
-    private final double updateRate = 1.0/60.0;
+    private final int panelHeight = 700; //vyska
+    private final double updateRate = 1.0/60.0; //FPS
     GameMenu gameMenu = new GameMenu(this);
+    SubstanceMaker substanceMaker = new SubstanceMaker(this);
     Thread gameThread;
 
     //konstruktor
     public GamePanel(){
         this.setPreferredSize(new Dimension(panelWidth, panelHeight)); //nastaveni velikosti
         this.setBackground(Color.BLACK); //nastaveni pozadi
+        this.addKeyListener(gameMenu);
         this.setFocusable(true); //nastaveni soustredeni
     }
 
@@ -39,7 +43,11 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g); // ??
         Graphics2D g2 = (Graphics2D)g; //vytvoreni 2d grafiky
 
-        gameMenu.draw(g2);
+        if(gameMenu.getSelectState() == 0){
+            gameMenu.draw(g2);
+        }else if(gameMenu.getSelectState() == 1){
+            substanceMaker.draw(g2);
+        }
     }
 
     public void Update(){
