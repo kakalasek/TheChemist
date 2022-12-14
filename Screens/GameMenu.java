@@ -20,7 +20,7 @@ public class GameMenu extends Screen{
         g2.setFont(new Font("SansSerif", Font.BOLD, 64));
         g2.drawString("TheChemist", gamePanel.getPanelWidth()/2 - (g2.getFontMetrics().stringWidth("TheChemist")/2), 200);
 
-        //setting, start, load
+        //settings, start, load
         g2.setFont(new Font("SansSerif", Font.ITALIC, 32));
         g2.drawString("Start", gamePanel.getPanelWidth()/2 - (g2.getFontMetrics().stringWidth("Start")/2), 330);
         g2.drawString("Load", gamePanel.getPanelWidth()/2 - (g2.getFontMetrics().stringWidth("Load")/2), 400);
@@ -34,5 +34,7 @@ public class GameMenu extends Screen{
             throw new RuntimeException(e);
         }
         g2.drawImage(labBottle, gamePanel.getPanelWidth()/2 + (g2.getFontMetrics().stringWidth("TheChemist")), 100, 150, 150, null);
+
+
     }
 }

@@ -15,5 +15,7 @@ public class Main {
 
         frame.setLocationRelativeTo(null); //zarovnani doprostred obrazovky
         frame.setVisible(true); //zviditelneni okna
+
+        gamePanel.startGameThread();
     }
 }
