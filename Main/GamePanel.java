@@ -6,20 +6,25 @@ import Screens.SubstanceMaker;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class GamePanel extends JPanel implements Runnable{
-    private final int panelWidth = 1000; //sirka 
-    private final int panelHeight = 700; //vyska
+    public static int gameState = 0; //momentalni stav hry, resp. vykreslovana obrazovka
+    private final int panelWidth = 1000; //sirka panelu/okna
+    private final int panelHeight = 700; //vyska panelu/okne
     private final double updateRate = 1.0/60.0; //FPS
-    GameMenu gameMenu = new GameMenu(this);
-    SubstanceMaker substanceMaker = new SubstanceMaker(this);
-    Thread gameThread;
+    private GameMenu gameMenu;
+    private SubstanceMaker substanceMaker;
+    private Thread gameThread;
 
     //konstruktor
-    public GamePanel(){
+    public GamePanel() throws IOException {
         this.setPreferredSize(new Dimension(panelWidth, panelHeight)); //nastaveni velikosti
         this.setBackground(Color.BLACK); //nastaveni pozadi
-        this.addKeyListener(gameMenu);
+        this.setLayout(null); //zadny layout
+        gameMenu = new GameMenu(this);
+        substanceMaker = new SubstanceMaker(this);
+        this.addKeyListener(gameMenu); //pridani keylisteneru s gameMenu
         this.setFocusable(true); //nastaveni soustredeni
     }
 
@@ -43,9 +48,10 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(g); // ??
         Graphics2D g2 = (Graphics2D)g; //vytvoreni 2d grafiky
 
-        if(gameMenu.getSelectState() == 0){
+        //vyber vykreslovane obrazovky
+        if(gameState == 0){
             gameMenu.draw(g2);
-        }else if(gameMenu.getSelectState() == 1){
+        }else if(gameState == 1){
             substanceMaker.draw(g2);
         }
     }

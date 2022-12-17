@@ -10,19 +10,17 @@ import java.io.File;
 import java.io.IOException;
 
 public class GameMenu extends Screen {
-    private int selectNum = 0;
-    private int selectState = 0;
-    public GameMenu(GamePanel gamePanel) {
+    private int selectNum = 0; //prave vybrana moznost
+    private BufferedImage labBottle = ImageIO.read(new File("Resources/LabBottle.png")); //obrazek
+
+    //konstruktor
+    public GameMenu(GamePanel gamePanel) throws IOException {
         super(gamePanel);
     }
 
-    //gettery a settery
-    public int getSelectState(){
-        return selectState;
-    }
-
+    //metoda pro vykreslovani
     public void draw(Graphics2D g2){
-        g2.setColor(Color.white);
+        g2.setColor(Color.white); // barva textu
 
         //nazev
         g2.setFont(new Font("SansSerif", Font.BOLD, 64));
@@ -50,12 +48,6 @@ public class GameMenu extends Screen {
         }
 
         //obrazek
-        BufferedImage labBottle = null;
-        try {
-            labBottle = ImageIO.read(new File("Resources/LabBottle.png"));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         g2.drawImage(labBottle, gamePanel.getPanelWidth()/2 + (g2.getFontMetrics().stringWidth("TheChemist")), 100, 150, 150, null);
 
 
@@ -66,13 +58,13 @@ public class GameMenu extends Screen {
     @Override
     public void keyTyped(KeyEvent keyEvent) {
         switch (keyEvent.getKeyChar()) {
-            case 'w': selectNum--;
+            case 'w': selectNum--; //pohyb nahoru
                 break;
-            case 's': selectNum++;
+            case 's': selectNum++; //pohyb dolu
             break;
-            case '\n':
+            case '\n': //vyber
                 if(selectNum == 0){
-                    selectState = 1;
+                    GamePanel.gameState = 1;
             }
             break;
         }
