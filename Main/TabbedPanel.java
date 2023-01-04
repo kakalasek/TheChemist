@@ -4,10 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TabbedPanel extends JTabbedPane {
-    SubstanceMaker substanceMaker = new SubstanceMaker();
+    private SubstanceMaker substanceMaker;
 
     public TabbedPanel(){
         this.setPreferredSize(new Dimension(1000, 700));
+        substanceMaker = new SubstanceMaker();
         this.addTab("Maker", substanceMaker);
     }
 }

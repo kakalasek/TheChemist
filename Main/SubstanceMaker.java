@@ -5,6 +5,10 @@ import Main.TabbedPanel;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class SubstanceMaker extends JPanel {
     private int currentRow = 0;
@@ -19,7 +23,7 @@ public class SubstanceMaker extends JPanel {
     Action elementLeft;
     Action elementRight;
     Action elementSwitch;
-    BlueprintPanel blueprintPanel = new BlueprintPanel();
+    ChemicalPanel chemicalPanel = new ChemicalPanel();
     JButton get;
     JButton makeBlueprint;
     JButton info;
@@ -27,10 +31,11 @@ public class SubstanceMaker extends JPanel {
     public SubstanceMaker() {
         this.setLayout(null);
         this.setBackground(Color.WHITE);
-        this.add(blueprintPanel);
+        this.add(chemicalPanel);
         loadElementMatrix();
         manageKeyBindings();
         manageButtons();
+        setUpActionListeners();
     }
 
     private void loadElementMatrix(){
@@ -80,6 +85,83 @@ public class SubstanceMaker extends JPanel {
         this.add(get);
         this.add(makeBlueprint);
         this.add(info);
+    }
+
+    private boolean isChemical() throws IOException {
+        File file = new File("/home/pipa/TheChemist/Main/solutions");
+        ArrayList<String[]> solutions = FileHandler.readCSV(file);
+
+        for(String[] solution : solutions){
+            if(Integer.parseInt(solution[1]) == getChemicalID()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private int getChemicalID() throws IOException {
+        File file = new File("/home/pipa/TheChemist/Main/elementValues");
+        ArrayList<String[]> elementValues = FileHandler.readCSV(file);
+        int chemicalID = 0;
+
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 13; j++) {
+                if(elementMatrix[i][j].getText().equals(".")){
+                    continue;
+                }
+                for(String[] element : elementValues){
+                    if(element[0].equals(elementMatrix[i][j].getText())){
+                        chemicalID += Integer.parseInt(element[1]);
+                    }
+                }
+            }
+        }
+        return chemicalID;
+    }
+
+    private String getChemical() throws IOException {
+        File file = new File("/home/pipa/TheChemist/Main/solutions");
+        ArrayList<String[]> solutions = FileHandler.readCSV(file);
+        String chemical = "";
+
+                for(String[] solution : solutions){
+                    if(Integer.parseInt(solution[1]) == getChemicalID()){
+                        chemical = solution[0];
+                        break;
+                    }
+                }
+        return chemical;
+    }
+
+    private void setUpActionListeners() {
+        ActionListener getElement = new ActionListener() {
+            File file = new File("/home/pipa/TheChemist/Main/resources");
+            @Override
+            public void actionPerformed(ActionEvent actionEvent){
+                try {
+                    if(isChemical() == true) {
+                        String out = getChemical() + "," + getChemicalID();
+                        FileHandler.writeCSV(file, out);
+                    }
+                }catch(IOException e){
+                    e.printStackTrace();
+                }
+            }
+        };
+        get.addActionListener(getElement);
+        ActionListener makeBlueprint = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        };
+
+        ActionListener openInfo = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+            }
+        };
     }
 
     private void manageKeyBindings(){
