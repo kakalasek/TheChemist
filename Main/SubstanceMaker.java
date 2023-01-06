@@ -15,7 +15,7 @@ public class SubstanceMaker extends JPanel {
     private int currentColumn = 0;
     private int lastFocusedRow = 0;
     private int lastFocusedColumn = 0;
-    private JLabel[][] elementMatrix;
+    public static JLabel[][] elementMatrix;
     private Font elementFont;
     private Font buttonFont;
     Action elementUp;
@@ -26,7 +26,7 @@ public class SubstanceMaker extends JPanel {
     ChemicalPanel chemicalPanel = new ChemicalPanel();
     JButton get;
     JButton makeBlueprint;
-    JButton info;
+    JButton clear;
 
     public SubstanceMaker() {
         this.setLayout(null);
@@ -71,20 +71,20 @@ public class SubstanceMaker extends JPanel {
     private void manageButtons(){
         get = new JButton("Get");
         makeBlueprint = new JButton("Make Blueprint");
-        info = new JButton("i");
+        clear = new JButton("C");
         buttonFont = new Font("Serif", Font.BOLD, 30);
 
         get.setBounds(50, 610, 100, 50);
         makeBlueprint.setBounds(200, 610, 300, 50);
-        info.setBounds(630, 610, 50, 50);
+        clear.setBounds(630, 610, 60, 50);
 
         get.setFont(buttonFont);
         makeBlueprint.setFont(buttonFont);
-        info.setFont(buttonFont);
+        clear.setFont(buttonFont);
 
         this.add(get);
         this.add(makeBlueprint);
-        this.add(info);
+        this.add(clear);
     }
 
     private boolean isChemical() throws IOException {
@@ -133,15 +133,57 @@ public class SubstanceMaker extends JPanel {
         return chemical;
     }
 
+    private boolean isThere(String id) throws IOException {
+        File file = new File("/home/pipa/TheChemist/Main/resources");
+        ArrayList<String[]> resources = FileHandler.readCSV(file);
+        for(String[] resource : resources){
+            if(resource[1].equals(id)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String numberIsThere(String id) throws IOException {
+        File file = new File("/home/pipa/TheChemist/Main/resources");
+        ArrayList<String[]> resources = FileHandler.readCSV(file);
+        for(String[] resource : resources){
+            if(resource[1].equals(id)){
+                return resource[2];
+            }
+        }
+        return null;
+    }
+
+    private void createBlueprint() throws IOException {
+        String blueprint = "";
+        File file = new File("/home/pipa/TheChemist/Main/BlueprintCodes");
+        blueprint += getChemicalID();
+        for(int i = 0; i < 12; i++){
+            for(int j = 0; j < 13; j++){
+                if(elementMatrix[i][j].getText().equals(".") == false){
+                    blueprint += "," + elementMatrix[i][j].getText() + "," + i + "," + j;
+                }
+            }
+        }
+        FileHandler.writeCSV(file, blueprint, true);
+    }
+
     private void setUpActionListeners() {
         ActionListener getElement = new ActionListener() {
             File file = new File("/home/pipa/TheChemist/Main/resources");
             @Override
             public void actionPerformed(ActionEvent actionEvent){
-                try {
+                try{
                     if(isChemical() == true) {
-                        String out = getChemical() + "," + getChemicalID();
-                        FileHandler.writeCSV(file, out);
+                        if(isThere(String.valueOf(getChemicalID())) == true){
+                            int nextValue = Integer.parseInt(numberIsThere(String.valueOf(getChemicalID()))) + 1;
+                            String out = getChemical() + "," + getChemicalID() + "," + nextValue;
+                            FileHandler.writeCSV(file, out, true);
+                        }else {
+                            String out = getChemical() + "," + getChemicalID() + "," + 1;
+                            FileHandler.writeCSV(file, out, true);
+                        }
                     }
                 }catch(IOException e){
                     e.printStackTrace();
@@ -149,19 +191,20 @@ public class SubstanceMaker extends JPanel {
             }
         };
         get.addActionListener(getElement);
-        ActionListener makeBlueprint = new ActionListener() {
+        ActionListener createBlueprint = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
-            }
+                try {
+                if(isChemical() == true) {
+                    createBlueprint();
+                }
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
         };
+        makeBlueprint.addActionListener(createBlueprint);
 
-        ActionListener openInfo = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        };
     }
 
     private void manageKeyBindings(){

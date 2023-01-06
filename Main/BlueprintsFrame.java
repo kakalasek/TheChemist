@@ -1,11 +1,22 @@
 package Main;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 public class BlueprintsFrame extends JFrame {
     BlueprintsPanel blueprintsPanel;
+    private static BlueprintsFrame instance;
 
-    public BlueprintsFrame(){
+    public static BlueprintsFrame getInstance() throws IOException {
+        if(instance == null){
+            instance = new BlueprintsFrame();
+        }
+        return instance;
+    }
+
+    private BlueprintsFrame() throws IOException {
         this.setResizable(false);
         this.setTitle("Blueprints");
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -16,5 +27,12 @@ public class BlueprintsFrame extends JFrame {
 
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                instance = null;
+            }
+        });
     }
 }

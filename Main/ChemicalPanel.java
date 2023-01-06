@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class ChemicalPanel extends JPanel {
     private Font mainFont;
@@ -37,7 +38,11 @@ public class ChemicalPanel extends JPanel {
         ActionListener resourcesListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-               resourcesFrame = new ResourcesFrame();
+                try {
+                    ResourcesFrame.getInstance();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
         resources.addActionListener(resourcesListener);
@@ -45,7 +50,11 @@ public class ChemicalPanel extends JPanel {
         ActionListener blueprintsListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                blueprintsFrame = new BlueprintsFrame();
+                try {
+                    BlueprintsFrame.getInstance();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         };
         blueprints.addActionListener(blueprintsListener);

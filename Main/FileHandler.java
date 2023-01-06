@@ -19,8 +19,8 @@ public class FileHandler{
         return finalList;
     }
 
-    public static void writeCSV(File file, String values) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+    public static void writeCSV(File file, String values, boolean rewrite) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, rewrite));
         if(file.length() == 0){
             bufferedWriter.write(values);
         }else{
