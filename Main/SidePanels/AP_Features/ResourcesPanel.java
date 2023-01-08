@@ -22,7 +22,7 @@ public class ResourcesPanel extends JPanel {
     }
 
     /**
-     * Renders the matrix of resources and creates it
+     * Renders the matrix of resources
      */
     private void setUpResourceMatrix(){
         labelFont = new Font("Serif", Font.PLAIN, 10);
@@ -53,7 +53,7 @@ public class ResourcesPanel extends JPanel {
 
         ArrayList<String[]> res = FileHandler.readCSV(resources);
         for(String[] singleResource : res){
-            resourceMatrix[row][column].setText(singleResource[0]);
+            resourceMatrix[row][column].setText(singleResource[0] + ";" + singleResource[2]);
             row++;
             if(row == 16){
                 row = 0;

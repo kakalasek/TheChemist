@@ -1,0 +1,67 @@
+Tento soubor obsahuje návod na používání programu a doplňující informace o něm.
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Program slouží k vytváření různých chemických sloučenin a jejich následnému ukládání. Sloučeniny slouží jako určitý zdroj a dají se vytvořit blueprinty už vyrvořených sloučenin.
+Program je součástí většího projektu, proto může působit nedodělaně. Proto je zde také implementován např. TabbedPane, který zdánlivě nemá žádný účel.
+Zatím jsem nevyřešil problém se soustředěním na jednotlivé objekty, takže pro dostání se k ovládání matice jednotlivých elementů je potřeba párkrát poklikat TAB. Jakmile nebude žádné tlačítko ani záložka na TabbedPanu zvýrazněná, soustředění by mělo být přímo na hlavním panelu a mělo by být možné se pohybovat a psát na matici elementů  Je to otravné a hlupé, ale stejně otravné je to řešit.
+Teď si projdeme jednotlivé části a vysvětlíme si, k čemu slouží a jak fungují:
+
+
+========================
+
+Matice elementů
+---------------
+
+Pro pohyb po matici se používají šipky. Právě vybraná buňka je zvýrazněná. 
+Při stisku klávesy s písmenem se písmeno objeví v právě vybrané buňce(s výjimkou písmen j,q,x). Písmeno reprezentuje zkratku prvku.
+Pokud má zkratka prvku dvě písmena, vytvoří se stistknutím těchto písmen v takovém pořadí, ve kterém jsou ve zkratce. Pokud taková zkratka skutečně existuje, program to rozpozná a v buňce se objeví. Pokud taková zkratka neexistuje, druhé zmáčknuté písmeno jednoduše přepíše to první.
+Jednoduchá vazba se vytváří stisknutím '-', dvojná '=', trojná '_'. Trojná vazbá se vytváří takto, protože potřebný znak jsem na klávesnici nenašel.
+Buňka se dá také stisknutím '.' opět vrátit do původního stavu.
+Vytváří se zde jednotlivé sloučeniny. Např. voda by se vytvořila následovně: H-O-H kde každý znak je v jedné buňce matice.
+Pro správný běh programu nezáleží, kde a v jakém pořadí jednotlivé části sloučeniny leží. Pro lepší pocit a efekt však rázně doporučuji je vytvářet správně a hezky vedle sebe a se správně navázanými prvky.
+
+Tlačítko Get
+------------
+
+Tlačítko přídá vytvořenou sloučeniny do našeho seznamu surovin. V době psaní tohoto dokumentu ještě není implementována možnost získat více jedné sloučeniny.
+Pokud je nalezen v matici neexistující prvek, vyhodí se okénko s chybkou. Doporučuji pak toto tlačítko neklikat vícekrát. Počet okének s chybou není limitovaný. To je fíčura, ne bug :).
+Pokud je sloučenina v matici neplatná(neexistující nebo nevyskytující se v souboru, se kterým se kontroluje), nic se nestane. Sloučenina se jednoduše nikam nezapíše.
+
+Tlačítko Make Blueprint
+-----------------------
+
+Tlačítko vytvoří blueprint sloučeniny a přidá ho do seznamu blueprintů. Vytvořenou sloučeninu si tak můžeme kdykoliv načíst zpět na matici elementů.
+Opět vyhazuje okénko s chybkou, viz druhý řádek popisu tlačítka Get.
+Pokud je sloučenina neplatná, také se nikam nezapíše, viz třetí řádek popisu tlačítka Get.
+
+Tlačítko C (clear)
+------------------
+
+Nastaví všechny buňky matice elementů na původní hodnotu, tedy znak '.', a tím ji efektivně vyčistí.
+
+Tlačítko Resources
+------------------
+
+Po stisknutí otevře okénko s našimi zdroji, které jsme sem přidali tlačítkem Get.
+V době psaní tohoto dokumentu se zde neukazuje počet přidaných sloučenin. Každá sloučenina tu tedy bude jen jednou, bez čísla vedle sebe, které by indikovalo počet sloučeniny, který jsme sem přidali.
+Okénko může být otevřeno jen jednou. Stisknutí tlačítka znovu nemá žádný efekt.
+Vyskytuje se tu jeden malý problém. Není vyřešena možnost, že by došlo místo v okénku. Tedy, že by poslední místo bylo zaplněno a my se pokusili přidat další sloučeninu. Sklad je dost velký na to, aby snížil šanci takové události. Pokud bychom se nám však i tak povedlo se o něco takového pokusit, kdo ví, co by se stalo... sám jsem to nezkoušel. Program by buď vyhodil nějakou zajímavou chybku, nebo by reagoval zvláštně. Tento problém hodlám vyřešit v budoucnosti. Prozatím prosím nezkoušet!
+
+Tlačítko Blueprints
+-------------------
+
+Po stisknutí otevře okénko s našimi blueprinty. Každý je reprezentován pomocí tlačítka se vzorcem příslušné sloučeniny.
+Prázdné tlačítko znamená blueprint, který zatím nebyl přiřazen k žádné sloučenině. Jeho stisknutí tudíž nic nedělá.
+Pokud stiskneme tlačítko s nějakým vzorcem, příslušná sloučenina se načte do matice elementů tak, jak jsme ji vytvořili.
+Od každé sloučeniny můžeme mít vytvořený jen jeden blueprint.
+Zde se vyskytuje stejný problém jako u okénka s našimi zdroji, viz čtvrý řádek popisu tlačítka Resources
+
+========================
+
+
+Program má hned několik nevyřešených chyb a jsem si toho plně vědom. Všechny plánuji vyřešit v budoucnosti.
+Kvůli chřipce a prokrastinaci jsem nestihl dodělat vše, co jsem plánoval a nevyřešil jsem ani všechny chyby.
+Program je ale používatelný, přestože bezúčelný.
+Pro zkoušení vytváření různých sloučenin doporučuji projet si soubor Chemicals, kde jsou vypsané všechny vytvořitelné sloučeniny. Podle internetu je potom možné si vyhledat podobu sloučeniny i s jejími vazbami a vytvořit ji v programu. Přidávám i soubor s několika příklady.
+
+

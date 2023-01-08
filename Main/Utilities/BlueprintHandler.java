@@ -83,9 +83,9 @@ public class BlueprintHandler {
 
     /**
      * A method that checks if the respective blueprint is not already there
-     * @param id Id of the chemical we want to check
+     * @param id ID of the chemical we want to check
      * @param file_Blueprints Just a file needed for this to work. File with blueprints
-     * @return return true if the respective blueprint already exist and false if not
+     * @return return true if the respective blueprint already exists and false if not
      * @throws IOException
      */
     private boolean isThereChemical_Blueprints(String id, File file_Blueprints) throws IOException {

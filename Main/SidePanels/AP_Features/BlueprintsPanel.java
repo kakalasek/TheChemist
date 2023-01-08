@@ -16,6 +16,7 @@ public class BlueprintsPanel extends JPanel {
     private JButton[][] blueprintMatrix;
     private File blueprints = new File("/home/pipa/TheChemist/Main/Files/Blueprints");
     private File chemicals = new File("/home/pipa/TheChemist/Main/Files/Chemicals");
+    private Font buttonFont;
     BlueprintHandler blueprintHandler = new BlueprintHandler();
 
     public BlueprintsPanel() throws IOException {
@@ -31,6 +32,7 @@ public class BlueprintsPanel extends JPanel {
      */
     private void loadButtons(){
         blueprintMatrix = new JButton[11][6];
+        buttonFont = new Font("Serif", Font.PLAIN, 10);
         int x = 5;
         int y = 3;
 
@@ -38,6 +40,7 @@ public class BlueprintsPanel extends JPanel {
             for (int column = 0; column < 6; column++) {
                 blueprintMatrix[row][column] = new JButton();
                 blueprintMatrix[row][column].setBounds(x, y, 73, 30);
+                blueprintMatrix[row][column].setFont(buttonFont);
                 this.add(blueprintMatrix[row][column]);
                 x += 83;
             }
