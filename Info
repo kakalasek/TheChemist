@@ -23,7 +23,7 @@ Pro správný běh programu nezáleží, kde a v jakém pořadí jednotlivé č�
 Tlačítko Get
 ------------
 
-Tlačítko přídá vytvořenou sloučeniny do našeho seznamu surovin. V době psaní tohoto dokumentu ještě není implementována možnost získat více jedné sloučeniny.
+Tlačítko přídá vytvořenou sloučeniny do našeho seznamu surovin. Při opakovaném kliknutí přidává počet dané sloučeniny v našem skladu.
 Pokud je nalezen v matici neexistující prvek, vyhodí se okénko s chybkou. Doporučuji pak toto tlačítko neklikat vícekrát. Počet okének s chybou není limitovaný. To je fíčura, ne bug :).
 Pokud je sloučenina v matici neplatná(neexistující nebo nevyskytující se v souboru, se kterým se kontroluje), nic se nestane. Sloučenina se jednoduše nikam nezapíše.
 
@@ -43,7 +43,7 @@ Tlačítko Resources
 ------------------
 
 Po stisknutí otevře okénko s našimi zdroji, které jsme sem přidali tlačítkem Get.
-V době psaní tohoto dokumentu se zde neukazuje počet přidaných sloučenin. Každá sloučenina tu tedy bude jen jednou, bez čísla vedle sebe, které by indikovalo počet sloučeniny, který jsme sem přidali.
+Zdroj je reprezentován vzorcem sloučeniny, vedle které je její kvantita. Čím více kliknutí tlačítka Get, tím více sloučeniny, která je v tu chvíli v matici elementů.
 Okénko může být otevřeno jen jednou. Stisknutí tlačítka znovu nemá žádný efekt.
 Vyskytuje se tu jeden malý problém. Není vyřešena možnost, že by došlo místo v okénku. Tedy, že by poslední místo bylo zaplněno a my se pokusili přidat další sloučeninu. Sklad je dost velký na to, aby snížil šanci takové události. Pokud bychom se nám však i tak povedlo se o něco takového pokusit, kdo ví, co by se stalo... sám jsem to nezkoušel. Program by buď vyhodil nějakou zajímavou chybku, nebo by reagoval zvláštně. Tento problém hodlám vyřešit v budoucnosti. Prozatím prosím nezkoušet!
 
