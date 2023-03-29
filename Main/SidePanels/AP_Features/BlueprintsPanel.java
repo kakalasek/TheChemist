@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class BlueprintsPanel extends JPanel {
     private JButton[][] blueprintMatrix;
-    private File blueprints = new File("/home/pipa/TheChemist/Main/Files/Blueprints");
-    private File chemicals = new File("/home/pipa/TheChemist/Main/Files/Chemicals");
+    private File blueprints = new File("Main/Files/Blueprints");
+    private File chemicals = new File("Main/Files/Chemicals");
     private Font buttonFont;
     BlueprintHandler blueprintHandler = new BlueprintHandler();
 

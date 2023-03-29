@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ResourcesPanel extends JPanel {
     private JLabel[][] resourceMatrix;
     private Font labelFont;
-    private File resources = new File("/home/pipa/TheChemist/Main/Files/Resources");
+    private File resources = new File("Main/Files/Resources");
 
     public ResourcesPanel() throws IOException {
         this.setPreferredSize(new Dimension(500, 400));

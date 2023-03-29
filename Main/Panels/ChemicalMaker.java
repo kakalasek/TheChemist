@@ -30,10 +30,10 @@ public class ChemicalMaker extends JPanel {
     private JButton get;
     private JButton makeBlueprint;
     private JButton clear;
-    private File resources = new File("/home/pipa/TheChemist/Main/Files/Resources");
-    private File elementValues = new File("/home/pipa/TheChemist/Main/Files/ElementValues");
-    private File chemicals = new File("/home/pipa/TheChemist/Main/Files/Chemicals");
-    private File blueprints = new File("/home/pipa/TheChemist/Main/Files/Blueprints");
+    private File resources = new File("Main/Files/Resources");
+    private File elementValues = new File("Main/Files/ElementValues");
+    private File chemicals = new File("Main/Files/Chemicals");
+    private File blueprints = new File("Main/Files/Blueprints");
     private ChemicalHandler chemicalHandler = new ChemicalHandler();
     private BlueprintHandler blueprintHandler = new BlueprintHandler();
 

@@ -26,8 +26,8 @@ public class MainFrame extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
-                    new FileOutputStream("/home/pipa/TheChemist/Main/Files/Blueprints").close();
-                    new FileOutputStream("/home/pipa/TheChemist/Main/Files/Resources").close();
+                    new FileOutputStream("Main/Files/Blueprints").close();
+                    new FileOutputStream("Main/Files/Resources").close();
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
